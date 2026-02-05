@@ -98,9 +98,9 @@
 .hero-headline {
     font-family: var(--font-body);
     font-weight: 700;
-    /* Increased size per user request */
-    font-size: clamp(6rem, 12vw, 13rem);
-    line-height: 0.99;
+    /* Scaled down to match ~85% zoom feel */
+    font-size: clamp(4.7rem, 10.3vw, 13rem);
+    line-height: 1.0;
     letter-spacing: -0.04em;
 
     /* Dither/Grain Effect */
@@ -113,19 +113,21 @@
     background-clip: text;
 
     /* Spacing adjustments */
-    margin-top: -1rem;
+    margin-top: -8rem;
+    /* Adjusted */
     margin-bottom: 1rem;
-    margin-left: -2rem;
+    /* Less aggressive */
     text-transform: none;
 }
 
 .hero-sub {
     font-family: var(--font-body);
-    font-size: 1.125rem;
+    font-size: 1.1rem;
     line-height: 1.5;
     color: var(--color-ink-dim);
     margin-bottom: 2rem;
     max-width: 600px;
+    margin-left: 2rem;
 
 }
 
@@ -138,6 +140,7 @@
     /* Light Gray button from Image 1 */
     color: var(--color-ink);
     padding: 1rem 3rem;
+    margin-left: 2rem;
     border: none;
     /* Slight radius */
     cursor: pointer;
@@ -165,31 +168,31 @@
 }
 
 .hero-image {
-    width: 140%;
-    /* Massive size per user request */
+    width: 135%;
+    /* Scaled down to emulate 85% zoom */
     max-width: none;
     /* Remove constraint */
     height: auto;
     object-fit: contain;
     display: block;
-    margin-left: -80%;
-    /* Pull heavily left */
-    margin-right: -12%;
-    /* Let the image bleed freely */
+    margin-left: -35%;
+    /* Moderate pull */
+    margin-right: -2%;
+    /* Slight bleed */
     pointer-events: none;
     /* Prevent interaction blocking */
 
     /* Use transform to move image independently of layout flow */
-    transform: translateY(14rem);
-    margin-top: -15rem;
+    transform: translateY(5rem);
+    margin-top: -8rem;
     /* Counteract space but use transform for visual placement */
 }
 
 /* --- Trusted By Grid (Cross Layout) --- */
 .trusted-by-section {
-    margin-top: 20rem;
+    margin-top: 10rem;
+    /* Reduced spacing */
     margin-bottom: 4rem;
-    /* Increased from 6rem to clear the lowered Hero Image */
     display: flex;
     justify-content: center;
 }
