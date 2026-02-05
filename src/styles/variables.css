@@ -1,0 +1,37 @@
+:root {
+  /* -- Palette -- */
+  /* The Paper Canvas */
+  --color-bg: #fbfbfb;
+  --color-paper: #EBEBEB;
+
+  /* The Ink / Structure */
+  --color-ink: #1A1A1A;
+  --color-ink-dim: #404040;
+
+  --color-cyan: #00FFFF;
+  --color-cyan-dim: #00E5FF;
+
+  /* -- Borders -- */
+  --color-border: #E5E5E5;
+  /* Faint line */
+  --color-border-heavy: #1A1A1A;
+  /* Keep for Hazard strip only */
+
+  /* -- Typography -- */
+  /* Headlines: Massive, Mechanic */
+  --font-display: 'Oswald', 'Impact', sans-serif;
+
+  /* Body: Clean, Readable */
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  /* Code: Technical, Monospace */
+  --font-mono: 'JetBrains Mono', 'Roboto Mono', monospace;
+
+  /* -- Spacing & Grid -- */
+  --spacing-unit: 8px;
+  --container-width: 1440px;
+  --header-height: 80px;
+
+  /* -- Effects -- */
+  --border-width: 1px;
+}

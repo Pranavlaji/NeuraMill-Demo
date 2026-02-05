@@ -1,0 +1,124 @@
+/* Careers Section */
+.careers-section {
+    padding: 6rem 0;
+    background-color: var(--color-bg);
+    border-bottom: var(--border-width) solid var(--color-ink);
+}
+
+.job-board {
+    border: var(--border-width) solid var(--color-ink);
+}
+
+.job-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--color-ink);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: var(--font-mono);
+}
+
+.job-row:last-child {
+    border-bottom: none;
+}
+
+.job-row:hover {
+    background-color: var(--color-ink);
+    color: var(--color-cyan);
+}
+
+.job-title {
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+/* Contact Section */
+.contact-section {
+    padding: 6rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 600px;
+}
+
+.contact-info {
+    padding-right: 4rem;
+    border-right: var(--border-width) solid var(--color-ink);
+}
+
+.contact-form-container {
+    padding-left: 4rem;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    color: var(--color-ink-dim);
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--color-ink);
+    padding: 1rem 0;
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--color-ink);
+    outline: none;
+    border-radius: 0;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    border-bottom-color: var(--color-cyan);
+    background-color: rgba(0, 255, 255, 0.05);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1.5rem;
+    background: var(--color-ink);
+    color: var(--color-cyan);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    font-weight: 700;
+    border: 1px solid var(--color-ink);
+    transition: all 0.2s ease;
+}
+
+.submit-btn:hover {
+    background: var(--color-cyan);
+    color: var(--color-ink);
+}
+
+@media (max-width: 900px) {
+    .contact-section {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+
+    .contact-info {
+        border-right: none;
+        border-bottom: var(--border-width) solid var(--color-ink);
+        padding-bottom: 4rem;
+        padding-right: 0;
+    }
+
+    .contact-form-container {
+        padding-left: 0;
+    }
+}

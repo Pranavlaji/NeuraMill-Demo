@@ -1,0 +1,361 @@
+.hero-section {
+    padding: 0 0 4rem 0;
+    /* User set to 0. Keeping it 0. */
+    margin-top: -1px;
+    /* Force overlap with Hazard Strip to ensure no gap/double border */
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    /* Ensure it fills the parent .app-frame */
+}
+
+.hero-frame {
+    width: 100%;
+    /* FORCE full width so borders align with Navbar */
+    margin: 0;
+    /* Handled by .app-frame wrapper */
+    /* EXACTLY matches Navbar side margins */
+    position: relative;
+    padding: 3rem;
+
+    /* Ensure edges are visible */
+    border: 1px solid var(--color-border);
+    /* Top border overlaps with Hazard Strip bottom border due to -1px margin, creating seamless join */
+}
+
+/* --- Thicker Corner Brackets (Matching Navbar) --- */
+.hero-frame::before,
+.hero-frame::after {
+    content: '';
+    position: absolute;
+    height: 12px;
+    width: 100%;
+    /* Full width of frame */
+    border: none;
+    pointer-events: none;
+}
+
+.hero-frame::before {
+    top: 0;
+    left: 0;
+    background:
+        linear-gradient(to right, var(--color-ink) 2px, transparent 2px) 0 0,
+        linear-gradient(to bottom, var(--color-ink) 2px, transparent 2px) 0 0,
+        linear-gradient(to left, var(--color-ink) 2px, transparent 2px) 100% 0,
+        linear-gradient(to bottom, var(--color-ink) 2px, transparent 2px) 100% 0;
+    background-size: 12px 12px;
+    background-repeat: no-repeat;
+}
+
+.hero-frame::after {
+    bottom: 0;
+    left: 0;
+    background:
+        linear-gradient(to right, var(--color-ink) 2px, transparent 2px) 0 100%,
+        linear-gradient(to top, var(--color-ink) 2px, transparent 2px) 0 100%,
+        linear-gradient(to left, var(--color-ink) 2px, transparent 2px) 100% 100%,
+        linear-gradient(to top, var(--color-ink) 2px, transparent 2px) 100% 100%;
+    background-size: 12px 12px;
+    background-repeat: no-repeat;
+}
+
+/* --- Layout --- */
+.hero-grid {
+    display: grid;
+    grid-template-columns: 58% 42%;
+    /* Gave text more room (58%) to prevent 4-line wrap */
+    /* gap: 0; User previously removed 2rem, implying minimal gap or let columns touch */
+    align-items: center;
+    min-height: 70vh;
+    max-width: var(--container-width);
+    margin: 0 auto;
+}
+
+.hero-visual {
+    display: flex;
+    justify-content: flex-end;
+    /* Align right */
+    align-items: center;
+    width: 100%;
+}
+
+.hero-image {
+    width: 170%;
+    /* Force it larger than the grid cell */
+    max-width: none;
+    /* Remove constraint */
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin-top: -5rem;
+    margin-left: -50%;
+    /* Pull heavily left towards text */
+    margin-right: 5%;
+    /* Push away from right edge */
+}
+
+/* --- Typography --- */
+.hero-headline {
+    font-family: var(--font-body);
+    font-weight: 700;
+    /* Increased size per user request */
+    font-size: clamp(6rem, 12vw, 13rem);
+    line-height: 0.99;
+    letter-spacing: -0.04em;
+
+    /* Dither/Grain Effect */
+    color: transparent;
+    background-color: var(--color-ink);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.4'/%3E%3C/svg%3E");
+    background-blend-mode: screen;
+    /* Eats into the black ink creating grain */
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    /* Spacing adjustments */
+    margin-top: -1rem;
+    margin-bottom: 1rem;
+    margin-left: -2rem;
+    text-transform: none;
+}
+
+.hero-sub {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    line-height: 1.5;
+    color: var(--color-ink-dim);
+    margin-bottom: 2rem;
+    max-width: 600px;
+
+}
+
+/* --- CTA --- */
+.hero-cta {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: 800;
+    background-color: #211dff;
+    /* Light Gray button from Image 1 */
+    color: var(--color-ink);
+    padding: 1rem 3rem;
+    border: none;
+    /* Slight radius */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: white;
+
+    /* Alignment for icon */
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.hero-cta:hover {
+    background-color: #0c09bd;
+    transform: translateY(-1px);
+}
+
+/* --- Visual --- */
+.hero-visual {
+    display: flex;
+    justify-content: flex-end;
+    /* Align right */
+    align-items: center;
+    width: 100%;
+}
+
+.hero-image {
+    width: 140%;
+    /* Massive size per user request */
+    max-width: none;
+    /* Remove constraint */
+    height: auto;
+    object-fit: contain;
+    display: block;
+    margin-left: -80%;
+    /* Pull heavily left */
+    margin-right: -12%;
+    /* Let the image bleed freely */
+    pointer-events: none;
+    /* Prevent interaction blocking */
+
+    /* Use transform to move image independently of layout flow */
+    transform: translateY(14rem);
+    margin-top: -15rem;
+    /* Counteract space but use transform for visual placement */
+}
+
+/* --- Trusted By Grid (Cross Layout) --- */
+.trusted-by-section {
+    margin-top: 20rem;
+    margin-bottom: 4rem;
+    /* Increased from 6rem to clear the lowered Hero Image */
+    display: flex;
+    justify-content: center;
+}
+
+.logo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr 1fr;
+    /* Center wider for text */
+    justify-content: center;
+    width: 100%;
+    max-width: 900px;
+}
+
+.logo-item {
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--color-border);
+    /* Full box border */
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--color-ink);
+    opacity: 0.8;
+    background-color: var(--color-bg);
+    position: relative;
+
+    /* Collapse borders */
+    margin-right: -1px;
+    margin-bottom: -1px;
+}
+
+/* Specific Cross Positions */
+.logo-item:nth-child(1) {
+    grid-area: 1 / 2 / 2 / 3;
+}
+
+/* Notion: Top Center */
+.logo-item:nth-child(2) {
+    grid-area: 2 / 1 / 3 / 2;
+}
+
+/* Webflow: Left */
+.logo-item:nth-child(3) {
+    grid-area: 2 / 2 / 3 / 3;
+}
+
+/* Text: Center */
+.logo-item:nth-child(4) {
+    grid-area: 2 / 3 / 3 / 4;
+}
+
+/* Retool: Right */
+.logo-item:nth-child(5) {
+    grid-area: 3 / 2 / 4 / 3;
+}
+
+/* Podium: Bottom Center */
+
+/* Corner Hazards */
+.logo-item:nth-child(6) {
+    grid-area: 1 / 1 / 2 / 2;
+}
+
+/* TL */
+.logo-item:nth-child(7) {
+    grid-area: 1 / 3 / 2 / 4;
+}
+
+/* TR */
+.logo-item:nth-child(8) {
+    grid-area: 3 / 1 / 4 / 2;
+}
+
+/* BL */
+.logo-item:nth-child(9) {
+    grid-area: 3 / 3 / 4 / 4;
+}
+
+/* BR */
+
+.hazard-filler {
+    background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='stripes' patternUnits='userSpaceOnUse' width='8' height='8' patternTransform='rotate(45)'%3E%3Crect width='2' height='16' fill='%23BFBFBF'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23stripes)'/%3E%3C/svg%3E");
+    opacity: 0.5;
+    /* Subtle */
+}
+
+.logo-text-block {
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-ink-dim);
+    line-height: 1.4;
+    font-weight: 500;
+    /* Ensure border matches others */
+}
+
+/* --- Responsive --- */
+/* --- Responsive --- */
+@media (max-width: 1024px) {
+    .hazard-filler {
+        display: none !important;
+        /* Hide fillers on mobile stack */
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 2rem;
+        min-height: auto;
+        padding-top: 4rem;
+    }
+
+    .hero-text-content {
+        align-items: center;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    /* Reset massive desktop image styles */
+    .hero-image {
+        width: 100%;
+        max-width: 500px;
+        margin: 2rem auto 0 auto;
+        transform: none;
+        pointer-events: auto;
+    }
+
+    .hero-visual {
+        justify-content: center;
+    }
+
+    /* Reset massive gap */
+    .trusted-by-section {
+        margin-top: 4rem;
+        margin-bottom: 4rem;
+    }
+
+    /* Stack logos on mobile/tablet */
+    .logo-grid {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 500px;
+    }
+
+    .logo-item {
+        width: 100%;
+        margin: 0;
+        margin-bottom: -1px;
+    }
+
+    /* Reset grid placement for flex stack */
+    .logo-item:nth-child(n) {
+        grid-area: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-headline {
+        font-size: clamp(3rem, 10vw, 5rem);
+        /* Smaller for mobile */
+        margin-top: 0;
+        margin-left: 0;
+    }
+
+    /* No need to hide logo grid, let it stack */
+}

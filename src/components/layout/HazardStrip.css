@@ -1,0 +1,36 @@
+.hazard-strip {
+    width: auto;
+    /* Allow margins to act */
+    height: 32px;
+    /* Use solid hex to fix color variation artifacts */
+    /* Reduced padding (2.5px) makes the lines longer while keeping a gap */
+    padding: 2.5px 0;
+    background-clip: content-box;
+    /* Switched to SVG for pixel-perfect rendering of diagonal lines */
+    background-image: url("data:image/svg+xml,%3Csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3Cpattern id='stripes' patternUnits='userSpaceOnUse' width='8' height='8' patternTransform='rotate(45)'%3E%3Crect width='2' height='16' fill='%23BFBFBF'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='100%25' height='100%25' fill='url(%23stripes)'/%3E%3C/svg%3E");
+    /* Top border handled by Navbar */
+    border-top: none;
+    border-bottom: 1px solid var(--color-border);
+    /* Match Navbar width */
+    margin: 0;
+    /* Handled by .app-frame */
+    /* Rounded bottom corners to complete the header unit shape */
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+    /* Aligns with Navbar */
+}
+
+/* Position modifiers */
+.hazard-strip.top {
+    margin: 0;
+    /* Removed margins to allow flush connection */
+}
+
+.hazard-strip.bottom {
+    margin-top: 4rem;
+}
+
+@media (max-width: 768px) {
+    .hazard-strip {
+        height: 16px;
+    }
+}

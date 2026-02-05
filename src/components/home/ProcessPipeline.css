@@ -1,0 +1,114 @@
+.pipeline-section {
+    padding: 6rem 0;
+    border-bottom: var(--border-width) solid var(--color-ink);
+}
+
+.pipeline-header {
+    margin-bottom: 4rem;
+    padding: 0 1rem;
+    text-align: center;
+}
+
+.pipeline-title {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.pipeline-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    position: relative;
+    padding: 2rem 0;
+    overflow-x: auto;
+}
+
+/* Connector Line */
+.pipeline-grid::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background-color: var(--color-ink);
+    z-index: 0;
+    transform: translateY(-50%);
+}
+
+.process-node {
+    flex: 1;
+    min-width: 250px;
+    background-color: var(--color-bg);
+    border: 2px solid var(--color-ink);
+    padding: 1.5rem;
+    position: relative;
+    z-index: 1;
+    transition: transform 0.2s ease;
+}
+
+.process-node:hover {
+    transform: translateY(-5px);
+    box-shadow: 4px 4px 0 var(--color-ink);
+}
+
+.node-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-ink-dim);
+    border-bottom: 1px dashed var(--color-ink);
+    padding-bottom: 0.5rem;
+}
+
+.node-icon-container {
+    width: 48px;
+    height: 48px;
+    background-color: var(--color-cyan);
+    border: 1px solid var(--color-ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.node-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.node-desc {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--color-ink-dim);
+}
+
+/* Hazard strip on connector logic could be simulated with repeating-linear-gradient on pseudoelement if desired */
+
+@media (max-width: 900px) {
+    .pipeline-grid {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .pipeline-grid::before {
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 4px;
+        height: auto;
+        right: auto;
+        transform: translateX(-50%);
+    }
+
+    .process-node {
+        margin-bottom: 2rem;
+    }
+}
