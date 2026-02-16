@@ -1,0 +1,678 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Montserrat:wght@400;500;600;700;800&display=swap');
+
+.saronic-homepage {
+  --hero-bg: #4282AA;
+  --ink-bright: #ffeda2;
+  --ink-copy: #ffffff;
+  --ink-dim: #ffffff;
+  --button-acid: #c44536;
+  --button-muted: #5f2d22;
+  --hero-fade: 0;
+
+  background: #031024;
+  overflow-x: clip;
+  position: relative;
+}
+
+.saronic-hero {
+  position: relative;
+  min-height: 100svh;
+  margin-top: -100svh;
+  z-index: 5;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 0 0 9svh;
+}
+
+.saronic-hero-sticky {
+  position: sticky;
+  top: 0;
+  min-height: 100svh;
+  overflow: hidden;
+  background: var(--hero-bg);
+  z-index: 1;
+}
+
+.saronic-hero-sticky::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #020a19;
+  opacity: calc((0.12 + var(--hero-fade) * 0.44));
+  pointer-events: none;
+  z-index: 2;
+}
+
+.saronic-topbar {
+  position: absolute;
+  top: 1.55rem;
+  right: 1.55rem;
+  z-index: 5;
+}
+
+.saronic-menu {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.12rem;
+  border: 0;
+  background: transparent;
+  color: #ffffff;
+  font-size: 0.86rem;
+  cursor: pointer;
+  padding: 0.34rem 0.4rem;
+}
+
+.saronic-menu span:first-child {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.saronic-hamburger {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.28rem;
+}
+
+.saronic-hamburger i {
+  width: 1.75rem;
+  height: 0.14rem;
+  background: #ffffff;
+}
+
+.saronic-brandline {
+  display: flex;
+  align-items: center;
+  padding: 5.1rem 0.8rem 0 1rem;
+  position: relative;
+  z-index: 4;
+}
+
+.saronic-brandline h1 {
+  margin: 0;
+  color: var(--ink-bright);
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(4.8rem, 13.2vw, 12.6rem);
+  font-weight: 800;
+  line-height: 0.86;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  flex: 1 1 auto;
+  opacity: calc(0.86 - (var(--hero-fade) * 0.66));
+}
+
+.saronic-copy {
+  position: relative;
+  margin: 0;
+  margin-right: clamp(4.1rem, 6.4vw, 6.6rem);
+  margin-left: auto;
+  z-index: 5;
+  width: min(50ch, 34vw);
+  padding-right: 0.45rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: 'Montserrat', sans-serif;
+  opacity: 1;
+}
+
+.saronic-kicker {
+  margin: 0 0 0.9rem;
+  color: var(--ink-dim);
+  font-size: clamp(0.86rem, 0.92vw, 1.08rem);
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+
+.saronic-headline {
+  margin: 0;
+  color: var(--ink-copy);
+  font-size: clamp(1.34rem, 2.2vw, 2.85rem);
+  line-height: 1.22;
+  font-weight: 500;
+  max-width: 28ch;
+}
+
+.saronic-actions {
+  display: flex;
+  gap: 0.85rem;
+  margin-top: 1.35rem;
+}
+
+.action {
+  min-width: 12.2rem;
+  padding: 0.84rem 1.15rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  border-radius: 0.32rem;
+  letter-spacing: 0.07em;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #ffffff;
+  transition: transform 180ms ease, filter 180ms ease;
+}
+
+.action strong {
+  font-size: 1.2rem;
+  line-height: 1;
+  font-weight: 400;
+}
+
+.action-primary {
+  background: var(--button-acid);
+}
+
+.action-secondary {
+  background: var(--button-muted);
+  color: #ffffff;
+}
+
+.action:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.04);
+}
+
+.capabilities-section {
+  position: relative;
+  z-index: 8;
+  margin-top: 0;
+  padding: 0 0 3rem;
+  background: #d4d8e3;
+}
+
+.capabilities-shell {
+  position: relative;
+  margin: 0;
+  border-top: 1px solid #b9c2ce;
+  background:
+    linear-gradient(90deg, #d4d8e3 0%, #d4d8e3 69%, #d2d7de 69%, #d2d7de 100%);
+  box-shadow: 0 -12px 24px rgba(24, 35, 52, 0.12);
+  padding: 1.9rem 2.05rem 2rem;
+  color: #101d2d;
+}
+
+.capabilities-header h2 {
+  margin: 0;
+  padding-top: clamp(4.2rem, 6.4vw, 5.8rem);
+  padding-bottom: clamp(2.8rem, 4.4vw, 4rem);
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(5.2rem, 14vw, 13rem);
+  line-height: 0.95;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+}
+
+.capabilities-intro {
+  margin: clamp(2rem, 3vw, 2.9rem) 0 0;
+  max-width: 33ch;
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  font-size: clamp(1.22rem, 2.2vw, 3rem);
+  line-height: 1.14;
+  font-weight: 500;
+}
+
+.capabilities-intro span {
+  width: 2.2rem;
+  height: 0.6rem;
+  margin-top: 0.65rem;
+  background: #c44536;
+  clip-path: polygon(0% 50%, 72% 6%, 100% 50%, 72% 94%);
+}
+
+.capability-tabs-row {
+  margin-top: clamp(4rem, 8vw, 7rem);
+  border-bottom: 1px solid #c2c8d0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding-bottom: 0.05rem;
+}
+
+.capability-tabs {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.capability-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.capability-tab {
+  flex: 0 0 auto;
+  border: 0;
+  background: transparent;
+  color: #7a808c;
+  font-size: clamp(1.08rem, 1.55vw, 2.1rem);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  line-height: 1;
+  padding: 0 0 1.25rem;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+}
+
+.capability-tab:hover {
+  color: #273443;
+}
+
+.capability-tab.is-active {
+  color: #141f2c;
+  border-bottom-color: #c44536;
+}
+
+.capability-body {
+  display: grid;
+  grid-template-columns: minmax(18rem, 0.34fr) minmax(0, 0.66fr);
+  gap: 2.6rem;
+  align-items: start;
+  margin-top: 2.05rem;
+}
+
+.capability-body p {
+  margin: 0;
+  color: #182434;
+  font-size: clamp(1.4rem, 2.1vw, 3rem);
+  line-height: 1.15;
+  font-weight: 500;
+  max-width: 16ch;
+}
+
+.capability-media {
+  min-height: clamp(18rem, 31vw, 38rem);
+  border: 1px solid rgba(121, 130, 142, 0.35);
+  background: #c4cad4;
+}
+
+.saronic-page {
+  min-height: 100vh;
+}
+
+.testimonial-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 76vh;
+  background: #4b5969;
+}
+
+.testimonial-copy {
+  background: #4b5969;
+  color: #e8edf4;
+  padding: clamp(2rem, 4.5vw, 4.2rem) clamp(1.2rem, 3vw, 3.2rem);
+  display: flex;
+  flex-direction: column;
+}
+
+.testimonial-copy p {
+  margin: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+}
+
+.testimonial-copy h3 {
+  margin: auto 0 2.1rem;
+  font-size: clamp(2rem, 3.2vw, 3.85rem);
+  line-height: 1.13;
+  font-weight: 500;
+  max-width: 15ch;
+}
+
+.testimonial-copy small {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.92rem;
+  letter-spacing: 0.07em;
+  opacity: 0.92;
+}
+
+.testimonial-media {
+  min-height: inherit;
+  background:
+    radial-gradient(circle at 48% 24%, #c8d8e9 0%, #b5c7d8 44%, #9aaec2 45%, #9aaec2 100%),
+    linear-gradient(180deg, #9fb2c7 0%, #8ea0b4 44%, #5f748b 100%);
+}
+
+.spec-highlight-section {
+  min-height: 82vh;
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(65% 40% at 55% 18%, #4f5965 0%, #3d4652 70%, #3d4652 100%),
+    linear-gradient(180deg, #313740 0%, #232932 44%, #1a2028 100%);
+}
+
+.spec-highlight-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, #2a313a 0%, #242b34 56%, #171d25 56%, #131920 100%);
+}
+
+.spec-card {
+  position: absolute;
+  right: clamp(1rem, 3.2vw, 3rem);
+  bottom: clamp(1rem, 3.2vw, 3rem);
+  width: min(44rem, 42vw);
+  background: #ffeda2;
+  color: #000000;
+  padding: clamp(1.5rem, 2.8vw, 2.3rem);
+  z-index: 2;
+}
+
+.spec-card p {
+  margin: 0;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+}
+
+.spec-card h4 {
+  margin: 1.7rem 0 2.5rem;
+  font-size: clamp(2rem, 3vw, 3.2rem);
+  line-height: 1.08;
+  font-weight: 500;
+  max-width: 13ch;
+}
+
+.spec-card a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 16.5rem;
+  padding: 0.9rem 1.35rem;
+  text-decoration: none;
+  background: #c44536;
+  color: #ffffff;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.spec-card strong {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+@media (max-width: 1260px) {
+  .saronic-brandline {
+    padding-top: 1.4rem;
+  }
+
+  .saronic-copy {
+    margin-right: clamp(1.2rem, 3vw, 3.2rem);
+    width: min(44ch, 36vw);
+  }
+
+  .saronic-headline {
+    font-size: clamp(1rem, 1.7vw, 1.65rem);
+  }
+
+  .capabilities-section {
+    margin-top: 0;
+  }
+
+  .capability-tabs {
+    gap: 1.15rem;
+  }
+
+  .capability-body {
+    grid-template-columns: minmax(14rem, 0.38fr) minmax(0, 0.62fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .saronic-topbar {
+    top: 1.35rem;
+    right: 1.35rem;
+  }
+
+  .saronic-menu {
+    gap: 0.86rem;
+    font-size: 0.94rem;
+  }
+
+  .saronic-brandline {
+    padding: 1rem 1rem 0;
+  }
+
+  .saronic-brandline h1 {
+    font-size: clamp(2.8rem, 13.8vw, 6.2rem);
+  }
+
+  .saronic-copy {
+    margin-right: 1.1rem;
+    width: min(82vw, 27rem);
+  }
+
+  .saronic-kicker {
+    font-size: clamp(0.72rem, 1.9vw, 0.9rem);
+  }
+
+  .saronic-headline {
+    font-size: clamp(0.95rem, 2.9vw, 1.5rem);
+    max-width: 31ch;
+  }
+
+  .capabilities-section {
+    margin-top: 0;
+    padding-bottom: 1.8rem;
+  }
+
+  .capabilities-shell {
+    margin: 0;
+    padding: 1.1rem 1rem 1.35rem;
+  }
+
+  .capabilities-header h2 {
+    padding-top: 1.8rem;
+    padding-bottom: 1.5rem;
+    font-size: clamp(3.4rem, 13vw, 5.6rem);
+  }
+
+  .capabilities-intro {
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    max-width: 34ch;
+  }
+
+  .capability-tabs-row {
+    margin-top: 2.2rem;
+  }
+
+  .capability-tab {
+    font-size: clamp(1rem, 2.6vw, 1.25rem);
+    padding-bottom: 0.88rem;
+  }
+
+  .capability-body {
+    margin-top: 1.3rem;
+    gap: 1.3rem;
+    grid-template-columns: 1fr;
+  }
+
+  .capability-body p {
+    max-width: none;
+    font-size: clamp(1.05rem, 3.8vw, 1.5rem);
+  }
+
+  .capability-media {
+    min-height: clamp(14rem, 45vw, 22rem);
+  }
+
+  .testimonial-section {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonial-copy h3 {
+    max-width: none;
+    margin-top: 1rem;
+  }
+
+  .testimonial-media {
+    min-height: 42vh;
+  }
+
+  .spec-highlight-section {
+    min-height: 70vh;
+  }
+
+  .spec-card {
+    left: 1rem;
+    right: 1rem;
+    width: auto;
+  }
+
+  .spec-card h4 {
+    max-width: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .saronic-copy {
+    margin-top: 0;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    width: auto;
+  }
+
+  .saronic-actions {
+    gap: 0.65rem;
+    margin-top: 1.2rem;
+  }
+
+  .action {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+
+  .capabilities-section {
+    margin-top: 0;
+    padding-bottom: 1.2rem;
+  }
+
+  .capabilities-shell {
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .capabilities-header h2 {
+    font-size: clamp(2.8rem, 17vw, 4.5rem);
+    line-height: 0.9;
+  }
+
+  .capabilities-intro {
+    margin-top: 1.35rem;
+    gap: 0.6rem;
+    max-width: none;
+    font-size: clamp(0.94rem, 5vw, 1.1rem);
+  }
+
+  .capabilities-intro span {
+    width: 1.45rem;
+    margin-top: 0.5rem;
+  }
+
+  .capability-tabs-row {
+    margin-top: 1.45rem;
+  }
+
+  .capability-tab {
+    font-size: 1.04rem;
+  }
+}
+
+@media (min-width: 1800px) {
+  .saronic-topbar {
+    top: 2rem;
+    right: 2rem;
+  }
+
+  .saronic-brandline {
+    padding-top: 6rem;
+    padding-left: 1.8rem;
+  }
+
+  .saronic-brandline h1 {
+    font-size: clamp(8rem, 11vw, 16rem);
+  }
+
+  .saronic-copy {
+    margin-right: clamp(2.2rem, 4vw, 6rem);
+    width: min(46ch, 30vw);
+  }
+
+  .saronic-kicker {
+    font-size: clamp(1rem, 0.8vw, 1.25rem);
+  }
+
+  .saronic-headline {
+    font-size: clamp(1.9rem, 1.9vw, 3.2rem);
+    max-width: 25ch;
+  }
+
+  .capabilities-shell {
+    padding: 2.8rem 3.4rem 3.2rem;
+  }
+
+  .capabilities-header h2 {
+    font-size: clamp(8rem, 11vw, 14rem);
+  }
+
+  .capabilities-intro {
+    max-width: 31ch;
+    font-size: clamp(1.45rem, 1.6vw, 2.6rem);
+  }
+
+  .capability-tabs {
+    gap: 2rem;
+  }
+
+  .capability-tab {
+    font-size: clamp(1.25rem, 1.3vw, 2rem);
+  }
+
+  .capability-body {
+    grid-template-columns: minmax(22rem, 0.31fr) minmax(0, 0.69fr);
+    gap: 3.2rem;
+  }
+
+  .capability-body p {
+    font-size: clamp(1.6rem, 1.8vw, 2.8rem);
+  }
+
+  .capability-media {
+    min-height: clamp(24rem, 30vw, 44rem);
+  }
+
+  .testimonial-copy {
+    padding: 3rem 3.2rem 3.2rem;
+  }
+
+  .testimonial-copy h3 {
+    font-size: clamp(2.4rem, 2.6vw, 4.2rem);
+    max-width: 16ch;
+  }
+
+  .spec-highlight-section {
+    min-height: 86vh;
+  }
+
+  .spec-card {
+    right: clamp(2rem, 4vw, 5rem);
+    bottom: clamp(2rem, 4vw, 5rem);
+    width: min(48rem, 36vw);
+  }
+
+  .spec-card h4 {
+    font-size: clamp(2.2rem, 2.2vw, 3.5rem);
+    max-width: 14ch;
+  }
+}
