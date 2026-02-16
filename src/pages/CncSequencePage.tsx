@@ -46,6 +46,7 @@ export function CncSequencePage() {
   );
 
   const showSequence = sequenceEnabled && !failed;
+  const isBackgroundLoading = showSequence && ready && loadingPercent < 100;
   const timelineItems = useMemo(
     () => [
       {
@@ -151,6 +152,12 @@ export function CncSequencePage() {
                 <div className="cnc-loading-state" aria-live="polite">
                   <span className="cnc-spinner" />
                   <p>Loading sequence {loadingPercent}%</p>
+                </div>
+              )}
+
+              {isBackgroundLoading && (
+                <div className="cnc-streaming-state" aria-live="polite">
+                  Streaming frames {loadingPercent}%
                 </div>
               )}
 

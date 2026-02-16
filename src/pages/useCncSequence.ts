@@ -6,6 +6,8 @@ import type { SequenceFrame } from './machSequence';
 
 const DESKTOP_SMOOTHING = 0.1;
 const MAX_LOAD_RETRIES = 2;
+const MAX_CONCURRENT_LOADS = 6;
+const READY_FRAME_THRESHOLD = 8;
 const JUMP_START_PROGRESS = 0.28;
 const JUMP_BLEND_SPAN = 0.14;
 const JUMP_SEGMENTS = 44;
@@ -39,6 +41,27 @@ function smoothStep(edge0: number, edge1: number, x: number) {
 
 function lerp(from: number, to: number, amount: number) {
   return from + (to - from) * amount;
+}
+
+function findNearestLoadedFrame(images: (HTMLImageElement | null)[], target: number) {
+  if (images[target]) {
+    return target;
+  }
+
+  const maxDistance = images.length - 1;
+  for (let distance = 1; distance <= maxDistance; distance += 1) {
+    const left = target - distance;
+    const right = target + distance;
+
+    if (left >= 0 && images[left]) {
+      return left;
+    }
+    if (right < images.length && images[right]) {
+      return right;
+    }
+  }
+
+  return -1;
 }
 
 function mapProgressToJumpedFrame(progress: number, totalFrames: number) {
@@ -162,12 +185,45 @@ export function useCncSequence({ sectionRef, canvasRef, frames, enabled }: UseCn
     let cancelled = false;
     let loadedCount = 0;
     let hasFailed = false;
+    let inFlight = 0;
+    let cursor = 0;
+    let firstFrameLoaded = false;
+    let readyEmitted = false;
 
     setReady(false);
     setFailed(false);
     setLoadingPercent(0);
 
     const loadedImages: (HTMLImageElement | null)[] = new Array(frames.length).fill(null);
+    imagesRef.current = loadedImages;
+    const readyTarget = Math.min(READY_FRAME_THRESHOLD, frames.length);
+    const loadOrder = Array.from({ length: frames.length }, (_, index) => index);
+
+    const markReadyIfPossible = () => {
+      if (readyEmitted || !firstFrameLoaded || loadedCount < readyTarget) {
+        return;
+      }
+
+      readyEmitted = true;
+      setReady(true);
+      setFrameIndex(0);
+      renderedFrameRef.current = -1;
+      const firstCanvas = canvasRef.current;
+      const firstImage = loadedImages[0];
+      if (firstCanvas && firstImage) {
+        drawContainImage(firstCanvas, firstImage);
+        renderedFrameRef.current = 0;
+      }
+    };
+
+    const launchNextBatch = () => {
+      while (!cancelled && !hasFailed && inFlight < MAX_CONCURRENT_LOADS && cursor < loadOrder.length) {
+        const nextFrameIndex = loadOrder[cursor];
+        cursor += 1;
+        inFlight += 1;
+        loadFrame(nextFrameIndex, 0);
+      }
+    };
 
     const loadFrame = (frameIndexToLoad: number, attempt: number) => {
       const frame = frames[frameIndexToLoad];
@@ -176,6 +232,7 @@ export function useCncSequence({ sectionRef, canvasRef, frames, enabled }: UseCn
 
       image.onload = async () => {
         if (cancelled || hasFailed) {
+          inFlight -= 1;
           return;
         }
 
@@ -190,42 +247,47 @@ export function useCncSequence({ sectionRef, canvasRef, frames, enabled }: UseCn
         loadedImages[frameIndexToLoad] = image;
         loadedCount += 1;
         setLoadingPercent(Math.round((loadedCount / frames.length) * 100));
+        firstFrameLoaded = firstFrameLoaded || frameIndexToLoad === 0;
+        markReadyIfPossible();
 
-        if (loadedCount === frames.length) {
-          imagesRef.current = loadedImages;
-          setReady(true);
-          setFrameIndex(0);
-          renderedFrameRef.current = -1;
-          const firstCanvas = canvasRef.current;
-          const firstImage = loadedImages[0];
-          if (firstCanvas && firstImage) {
-            drawContainImage(firstCanvas, firstImage);
-            renderedFrameRef.current = 0;
+        inFlight -= 1;
+        if (loadedCount === frames.length && !readyEmitted && firstFrameLoaded) {
+          markReadyIfPossible();
+          if (!readyEmitted) {
+            setReady(true);
           }
         }
+        launchNextBatch();
       };
 
       image.onerror = () => {
         if (cancelled) {
+          inFlight -= 1;
           return;
         }
 
         if (attempt < MAX_LOAD_RETRIES) {
-          window.setTimeout(() => loadFrame(frameIndexToLoad, attempt + 1), 120 * (attempt + 1));
+          inFlight -= 1;
+          window.setTimeout(() => {
+            if (cancelled || hasFailed) {
+              return;
+            }
+            inFlight += 1;
+            loadFrame(frameIndexToLoad, attempt + 1);
+          }, 120 * (attempt + 1));
           return;
         }
 
         hasFailed = true;
         setFailed(true);
         setReady(false);
+        inFlight -= 1;
       };
 
       image.src = frame.src;
     };
 
-    frames.forEach((_, index) => {
-      loadFrame(index, 0);
-    });
+    launchNextBatch();
 
     return () => {
       cancelled = true;
@@ -248,17 +310,19 @@ export function useCncSequence({ sectionRef, canvasRef, frames, enabled }: UseCn
         currentFrameRef.current = targetFrameRef.current;
       }
 
+      const canvas = canvasRef.current;
       const roundedFrame = clamp(Math.round(currentFrameRef.current), 0, frames.length - 1);
-      if (roundedFrame !== reportedFrameRef.current) {
-        reportedFrameRef.current = roundedFrame;
-        setFrameIndex(roundedFrame);
+      const resolvedFrame = findNearestLoadedFrame(imagesRef.current, roundedFrame);
+
+      if (resolvedFrame !== -1 && resolvedFrame !== reportedFrameRef.current) {
+        reportedFrameRef.current = resolvedFrame;
+        setFrameIndex(resolvedFrame);
       }
 
-      const canvas = canvasRef.current;
-      const image = imagesRef.current[roundedFrame];
-      if (canvas && image && roundedFrame !== renderedFrameRef.current) {
+      const image = resolvedFrame !== -1 ? imagesRef.current[resolvedFrame] : null;
+      if (canvas && image && resolvedFrame !== renderedFrameRef.current) {
         drawContainImage(canvas, image);
-        renderedFrameRef.current = roundedFrame;
+        renderedFrameRef.current = resolvedFrame;
       }
 
       rafRef.current = requestAnimationFrame(tick);
