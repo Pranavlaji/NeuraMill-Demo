@@ -50,39 +50,39 @@ export function CncSequencePage() {
     () => [
       {
         id: 'ready',
-        title: 'Raw Material Intake',
+        title: 'Loro ipsum',
         date: 'Step 01',
-        summary: 'Billet is staged and the cell sits in a ready baseline.',
+        summary: 'Lorem ipsum dolor sit amet consectetur adipiscing elit.',
       },
       {
         id: 'lock',
-        title: 'Datum Lock and Setup',
+        title: 'Loro ipsum',
         date: 'Step 02',
-        summary: 'Workholding secures the stock and verifies fixture alignment.',
+        summary: 'Lorem ipsum dolor sit amet consectetur adipiscing elit.',
       },
       {
         id: 'rough',
-        title: 'Rough Machining Pass',
+        title: 'Loro ipsum',
         date: 'Step 03',
-        summary: 'Primary cuts establish macro geometry for the part envelope.',
+        summary: 'Lorem ipsum dolor sit amet consectetur adipiscing elit.',
       },
       {
         id: 'precision',
-        title: 'Precision Toolpath',
+        title: 'Loro ipsum',
         date: 'Step 04',
-        summary: 'Finishing paths tighten tolerances and final edge definition.',
+        summary: 'Lorem ipsum dolor sit amet consectetur adipiscing elit.',
       },
       {
         id: 'integration',
-        title: 'Calibration Sweep',
+        title: 'Loro ipsum',
         date: 'Step 05',
-        summary: 'System checks alignment repeatability and process confidence.',
+        summary: 'Lorem ipsum dolor sit amet consectetur adipiscing elit.',
       },
       {
         id: 'deploy',
-        title: 'Validation and Deployment',
+        title: 'Loro ipsum',
         date: 'Step 06',
-        summary: 'Output is verified and the machine returns production-ready.',
+        summary: 'Lorem ipsum dolor sit amet consectetur adipiscing elit.',
       },
     ],
     [],
@@ -108,8 +108,7 @@ export function CncSequencePage() {
         <div className="cnc-sticky-shell">
           <div className="cnc-copy-pane">
             <p className="cnc-intro">
-              Neuramill brings AI into the physical manufacturing loop. As you scroll, the machine sequence advances
-              and each operating step is highlighted in the process timeline.
+              Neuramill is a techonology first manufacturing company, that makes design to cut 10x faster. <br /> AI-powered CAM that captures your machinists' tribal knowledge and makes it repeatable.
             </p>
 
             <div className="cnc-timeline" aria-label="Operation timeline">
